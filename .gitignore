@@ -1,0 +1,13 @@
+# secrets
+.env
+*.env
+application.properties
+
+# IntelliJ
+.idea/
+*.iml
+
+# build
+build/
+target/
+node_modules/
