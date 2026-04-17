@@ -1,0 +1,50 @@
+The UserService is going to be the service that handle the users works:
+login
+logout
+signup
+profile
+edit profile
+forget password
+UserName availability check --> indexing the Database --> username ->index
+users {
+    id (PK, UUID or BIGINT)
+
+    username (UNIQUE, INDEX, NOT NULL)
+    email (UNIQUE, INDEX, NULLABLE)
+    mobile (UNIQUE, INDEX, NULLABLE)
+
+    name
+
+    password_hash (NOT NULL)
+
+    is_active (BOOLEAN DEFAULT true)
+    is_verified (BOOLEAN DEFAULT false)
+
+    created_at
+    updated_at
+}
+refresh_tokens {
+    id (PK)
+
+    user_id (FK → users.id, INDEX)
+
+    token_hash (NOT raw token)
+
+    expiry_at
+
+    is_revoked (BOOLEAN DEFAULT false)
+
+    created_at
+    updated_at
+}
+Routes APIS for the userservices
+:-all the services should start from the user--> /v1/apis/user/....
+example for the APIs:
+signup routes:
+/v1/apis/users/signup--->
+Take body --> email , username , name , password
+Response -> status code: 200, message:created
+In that routes , when we get all the response we need to check for the input and validate
+the input , once the check complete , save the user detail in the db , and send the notification on the mobile sms or email
+to verify that via otp , when user upload the otp , we check the otp from the redis(marked like , userid:otp and if confirmed
+then we updated is_verified that into database,
