@@ -1,4 +1,4 @@
-package com.animestream.upload.config;
+package com.pm.videoencodingservice.config;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -9,9 +9,12 @@ import org.springframework.validation.annotation.Validated;
 @Getter
 @Setter
 @Validated
-@ConfigurationProperties(prefix = "app.kafka.topics")
-public class KafkaTopicsProperties {
+@ConfigurationProperties(prefix = "app.aws")
+public class AwsProperties {
 
     @NotBlank
-    private String videoUploaded = "video.uploaded.v1";
+    private String region;
+
+    @NotBlank
+    private String s3Bucket;
 }
