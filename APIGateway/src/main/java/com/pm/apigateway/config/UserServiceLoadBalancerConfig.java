@@ -21,8 +21,8 @@ public class UserServiceLoadBalancerConfig {
             @Override
             public Flux<List<ServiceInstance>> get() {
                 return Flux.just(List.of(
-                        new DefaultServiceInstance("user-1", "user-service", "localhost", 8081, false),
-                        new DefaultServiceInstance("user-2", "user-service", "localhost", 8082, false)
+                        new DefaultServiceInstance("user-1", "user-service", "user-service", 8081, false),
+                        new DefaultServiceInstance("user-2", "user-service", "user-service", 8082, false)
                 ));
             }
         };

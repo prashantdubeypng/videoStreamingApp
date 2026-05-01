@@ -1,0 +1,39 @@
+services:
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "8081:8081"
+
+  api-gateway:
+    build: ./APIGateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - user-service
+      - redis
+    environment:
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
+
+  video-upload-service:
+    build: ./video-upload-service
+    ports:
+      - "8082:8082"
+
+  video-encoding-service:
+    build: ./VideoEncodingService
+    ports:
+      - "8083:8083"
+
+volumes:
+  redis-data:

@@ -21,7 +21,7 @@ public class VideoUploadServiceLoadBalancerConfig {
             @Override
             public Flux<List<ServiceInstance>> get() {
                 return Flux.just(List.of(
-                        new DefaultServiceInstance("upload-1", "video-upload-service", "localhost", 8083, false)
+                        new DefaultServiceInstance("upload-1", "video-upload-service", "video-upload-service", 8083, false)
                 ));
             }
         };
